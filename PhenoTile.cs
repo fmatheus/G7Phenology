@@ -15,6 +15,7 @@ namespace G7Phenology
 {
     public class PhenoTile : Tile
     {
+        int state = 0;
         Rectangle icon1;
         Rectangle icon2;
 
@@ -35,13 +36,13 @@ namespace G7Phenology
             icon2 = createIcon("Brotamento");
             icons.Children.Add(icon1);
             icons.Children.Add(icon2);
+            renderState();
         }
 
         Rectangle createIcon(String name)
         {
             return new Rectangle
             {
-                Fill = new SolidColorBrush(Colors.Orange),
                 Width = 62,
                 Height = 62,
                 Margin = new Thickness(6),
@@ -50,6 +51,29 @@ namespace G7Phenology
                     ImageSource = new BitmapImage(new Uri("Icons/" + name + ".png", UriKind.RelativeOrAbsolute))
                 }
             };
+        }
+        void renderState()
+        {
+            switch (state)
+            {
+                case 0:
+                    icon1.Fill = new SolidColorBrush(Colors.White);
+                    icon2.Fill = new SolidColorBrush(Colors.White);
+                    break;
+                case 1:
+                    icon1.Fill = new SolidColorBrush(Colors.Green);
+                    break;
+                case 2:
+                    icon2.Fill = new SolidColorBrush(Colors.Green);
+                    break;
+            }
+        }
+
+        protected override void OnClick()
+        {
+            base.OnClick();
+            state = (state + 1) % 3;
+            renderState();
         }
     }
 }
