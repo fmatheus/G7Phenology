@@ -111,6 +111,10 @@
     <Resource Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Icons\Antese.png" />
+    <Resource Include="Icons\Botão.png" />
+    <Resource Include="Icons\Fruto Maduro.png" />
+    <Resource Include="Icons\Fruto Verde.png" />
     <Content Include="README_FIRST.txt" />
     <Content Include="SplashScreenImage.jpg" />
     <Resource Include="Toolkit.Content\ApplicationBar.Cancel.png" />
