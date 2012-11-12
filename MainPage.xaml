@@ -13,7 +13,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -40,37 +40,12 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Controls:Tile Background="DarkGreen" Click="Brotamento" Grid.Row="0" Grid.Column="0" Width="173" Height="173" TextWrapping="Wrap" Title="Brotamento">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Rectangle Fill="LightGreen" Width="64" Height="64" Margin="6">
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="Icons/Brotamento.png"/>
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <Rectangle Fill="Cyan" Width="64" Height="64" Margin="6">
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="Icons/Brotamento.png"/>
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </StackPanel>
-            </Controls:Tile>
-            <Controls:Tile Background="Goldenrod" Click="Queda" Grid.Row="0" Grid.Column="1" Width="173" Height="173" TextWrapping="Wrap" Title="Queda">
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                    <Rectangle Fill="Yellow" Width="62" Height="62" Margin="6">
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="Icons/Queda.png"/>
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <Rectangle Fill="White" Width="62" Height="62" Margin="6">
-                        <Rectangle.OpacityMask>
-                            <ImageBrush ImageSource="Icons/Queda.png"/>
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                </StackPanel>
-            </Controls:Tile>
-            <g7:PhenoTile>
-                
-            </g7:PhenoTile>
+            <g7:PhenoTile Grid.Row="0" Grid.Column="0"  Title="Brotamento" Background="Teal" Foreground="Turquoise" />
+            <g7:PhenoTile Grid.Row="0" Grid.Column="1" Title="Queda" Background="DarkGoldenrod" Foreground="Yellow" />
+            <g7:PhenoTile Grid.Row="1" Grid.Column="0"  Title="Botão" Background="DarkSlateBlue" Foreground="Plum" />
+            <g7:PhenoTile Grid.Row="1" Grid.Column="1" Title="Antese" Background="DarkMagenta" Foreground="Fuchsia" />
+            <g7:PhenoTile Grid.Row="2" Grid.Column="0"  Title="Fruto Verde" Background="DarkOliveGreen" Foreground="Lime" />
+            <g7:PhenoTile Grid.Row="2" Grid.Column="1" Title="Fruto Maduro" Background="Maroon" Foreground="OrangeRed" />
             <StackPanel x:Name="TitlePanel222" Grid.Column="2" Grid.RowSpan="3" Margin="12,17,0,28">
                 <Controls:RoundButton Grid.Row="1" Grid.Column="2" ImageSource="Toolkit.Content\ApplicationBar.Check.png" Click="RoundButton_Click" />
             </StackPanel>

@@ -23,20 +23,7 @@ namespace G7Phenology
         {
             Width = 173;
             Height = 173;
-            TextWrapping = TextWrapping.Wrap;
-            Title = "Brotamento";
-            Background = new SolidColorBrush(Colors.DarkGray);
-            StackPanel icons = new StackPanel
-            {
-                Orientation = Orientation.Horizontal,
-                HorizontalAlignment = HorizontalAlignment.Center
-            };
-            Content = icons;
-            icon1 = createIcon("Brotamento");
-            icon2 = createIcon("Brotamento");
-            icons.Children.Add(icon1);
-            icons.Children.Add(icon2);
-            renderState();
+            FontWeight = FontWeights.Bold;
         }
 
         Rectangle createIcon(String name)
@@ -56,15 +43,19 @@ namespace G7Phenology
         {
             switch (state)
             {
+                case -1:
+                    icon1.Fill = Foreground;
+                    icon2.Fill = new SolidColorBrush(Colors.White);
+                    break;
                 case 0:
                     icon1.Fill = new SolidColorBrush(Colors.White);
                     icon2.Fill = new SolidColorBrush(Colors.White);
                     break;
                 case 1:
-                    icon1.Fill = new SolidColorBrush(Colors.Green);
+                    icon1.Fill = Foreground;
                     break;
                 case 2:
-                    icon2.Fill = new SolidColorBrush(Colors.Green);
+                    icon2.Fill = Foreground;
                     break;
             }
         }
@@ -74,6 +65,25 @@ namespace G7Phenology
             base.OnClick();
             state = (state + 1) % 3;
             renderState();
+        }
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            if (Content == null)
+            {
+                Background.Opacity = 0.5;
+                StackPanel icons = new StackPanel
+                {
+                    Orientation = Orientation.Horizontal,
+                    HorizontalAlignment = HorizontalAlignment.Center
+                };
+                Content = icons;
+                icon1 = createIcon(Title);
+                icon2 = createIcon(Title);
+                icons.Children.Add(icon1);
+                icons.Children.Add(icon2);
+                renderState();
+            }
         }
     }
 }
