@@ -17,12 +17,14 @@ namespace G7Phenology
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        int count = -1;
-        static String[] target = { "Phalaenopsis hieroglyphica", "Ophrys tenthredinifera", "Angraecum sesquipedale", "Paphiopedilum concolor" };
+        int mockId = 119;
+        int mockSectorId = 23;
+        static String[] mockSpecies = { "Phalaenopsis hieroglyphica", "Ophrys tenthredinifera", "Angraecum sesquipedale", "Paphiopedilum concolor" };
 
         public MainPage()
         {
             InitializeComponent();
+            progress.Maximum = 10;
             next();
         }
 
@@ -34,18 +36,31 @@ namespace G7Phenology
                 PhenoTile pheno = (PhenoTile)ContentPanel.Children.ElementAt(i);
                 states.Add(pheno.reset());
             }
-            ToastPrompt toast = new ToastPrompt();
-            toast.Title = (121 + count).ToString();
-            toast.Message = target[count] + ": " + String.Join(",", states);
-            toast.ImageSource = new BitmapImage(new Uri("ApplicationIcon.png", UriKind.RelativeOrAbsolute));
-            toast.Show();
+            new ToastPrompt
+            {
+                Height = 173,
+                Margin = new Thickness {
+                    Top = 48
+                },
+                Title = mockId.ToString(),
+                VerticalContentAlignment = VerticalAlignment.Center,
+                Background = new SolidColorBrush
+                {
+                    Color = Colors.Black,
+                    Opacity = 0.85
+                },
+                Message = mockSpecies[mockId % 4] + ": " + String.Join(",", states),
+                ImageSource = new BitmapImage(new Uri("Toolkit.Content/ApplicationBar.Check.png", UriKind.RelativeOrAbsolute)),
+            }.Show();
             next();
-       }
+        }
         private void next()
         {
-            count = ++count % 4;
-            name.Content = 121 + count + " " + target[count];
-            image.Source = new BitmapImage(new Uri("Images/" + (count+1) + ".jpg", UriKind.RelativeOrAbsolute));
+            progress.Value = ++mockId % progress.Maximum;
+            if (progress.Value == 0)
+                sector.Text = "BS" + mockSectorId++;
+            name.Content = mockId + " " + mockSpecies[mockId % 4];
+            image.Source = new BitmapImage(new Uri("Images/" + (mockId % 4 + 1) + ".jpg", UriKind.RelativeOrAbsolute));
         }
 
 
