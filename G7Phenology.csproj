@@ -115,6 +115,11 @@
     <Resource Include="Icons\Botão.png" />
     <Resource Include="Icons\Fruto Maduro.png" />
     <Resource Include="Icons\Fruto Verde.png" />
+    <Resource Include="Icons\Note.png" />
+    <Resource Include="Images\1.jpg" />
+    <Resource Include="Images\2.jpg" />
+    <Resource Include="Images\3.jpg" />
+    <Resource Include="Images\4.jpg" />
     <Content Include="README_FIRST.txt" />
     <Content Include="SplashScreenImage.jpg" />
     <Resource Include="Toolkit.Content\ApplicationBar.Cancel.png" />
