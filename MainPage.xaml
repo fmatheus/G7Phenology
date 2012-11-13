@@ -25,7 +25,10 @@
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" HorizontalAlignment="Left">
             <ProgressBar x:Name="progress" Height="9" Maximum="100" Value="33" Foreground="White" />
-            <TextBlock x:Name="ApplicationTitle" FontWeight="Bold" Text="BS23" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock FontWeight="Bold" Text="BS23" Style="{StaticResource PhoneTextNormalStyle}"/>
+                <TextBlock x:Name="ApplicationTitle" FontWeight="Bold" Text="G7-Phenology" Margin="260,0,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
+            </StackPanel>
             <!--<Controls:ImageTile
     x:Name="imgTile"
 HorizontalAlignment="Center"
