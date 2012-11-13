@@ -24,6 +24,7 @@ namespace G7Phenology
             Width = 173;
             Height = 173;
             FontWeight = FontWeights.Bold;
+            Margin = new Thickness(12, 12, 0, 0);
         }
 
         Rectangle createIcon(String name)
@@ -32,7 +33,7 @@ namespace G7Phenology
             {
                 Width = 62,
                 Height = 62,
-                Margin = new Thickness(6),
+                Margin = new Thickness(6, 0, 6, 0),
                 OpacityMask = new ImageBrush
                 {
                     ImageSource = new BitmapImage(new Uri("Icons/" + name + ".png", UriKind.RelativeOrAbsolute))
@@ -60,6 +61,14 @@ namespace G7Phenology
             }
         }
 
+        public int reset()
+        {
+            int state = this.state;
+            this.state = 0;
+            renderState();
+            return state;
+        }
+
         protected override void OnClick()
         {
             base.OnClick();
@@ -71,7 +80,7 @@ namespace G7Phenology
             base.OnApplyTemplate();
             if (Content == null)
             {
-                Background.Opacity = 0.5;
+                Background.Opacity = 0.6;
                 StackPanel icons = new StackPanel
                 {
                     Orientation = Orientation.Horizontal,

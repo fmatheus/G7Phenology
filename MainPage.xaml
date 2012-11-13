@@ -18,18 +18,64 @@
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="page name" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" HorizontalAlignment="Left">
+            <ProgressBar x:Name="progress" Height="9" Maximum="100" Value="33" Foreground="White" />
+            <TextBlock x:Name="ApplicationTitle" FontWeight="Bold" Text="BS23" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <!--<Controls:ImageTile
+    x:Name="imgTile"
+HorizontalAlignment="Center"
+IsFrozen="False"
+AnimationType="Fade"
+AnimationDuration="250"
+ImageCycleInterval="2000"
+Rows="2"
+Columns="2"
+LargeTileRows="2"
+LargeTileColumns="2"
+Width="458"
+Height="173"/>-->
+            <!--<Controls:Tile Width="358" Margin="12" Title="124 Ophrys tenthredinifera" Foreground="Black">
+                <StackPanel>
+                <Controls:TileNotification
+                    Padding="18, 0"
+                    Background="Black" Opacity="0.8">
+                    124 Ophrys tenthredinifera
+                    </Controls:TileNotification>
+                    <Image Source="Images/3.jpg" Stretch="None"/>
+                </StackPanel>
+            </Controls:Tile>-->
+            <Controls:Tile
+            HorizontalAlignment="Left"
+            Margin="12, 12"
+            Width="458"
+            Height="173">
+                <Grid>
+                    <Canvas>
+                        <Image
+                        x:Name="image"
+                        Source="Images/3.jpg"
+                        Width="458">
+                            <Image.RenderTransform>
+                                <ScaleTransform ScaleY="0.5" />
+                            </Image.RenderTransform>
+                        </Image>
+                    </Canvas>
+                    <Controls:TileNotification x:Name="name" Opacity="0.8"
+                    Padding="18, 0"
+                    Background="Black">
+                        124 Ophrys tenthredinifera
+                    </Controls:TileNotification>
+                </Grid>
+            </Controls:Tile>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Grid.Column="0" Margin="12,0,12,0">
+        <Grid x:Name="ContentPanel" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -42,13 +88,21 @@
             </Grid.ColumnDefinitions>
             <g7:PhenoTile Grid.Row="0" Grid.Column="0"  Title="Brotamento" Background="Teal" Foreground="Turquoise" />
             <g7:PhenoTile Grid.Row="0" Grid.Column="1" Title="Queda" Background="DarkGoldenrod" Foreground="Yellow" />
-            <g7:PhenoTile Grid.Row="1" Grid.Column="0"  Title="Botão" Background="DarkSlateBlue" Foreground="Plum" />
-            <g7:PhenoTile Grid.Row="1" Grid.Column="1" Title="Antese" Background="DarkMagenta" Foreground="Fuchsia" />
+            <g7:PhenoTile Grid.Row="1" Grid.Column="0"  Title="Botão" Background="DarkSlateBlue" Foreground="Salmon" />
+            <g7:PhenoTile Grid.Row="1" Grid.Column="1" Title="Antese" Background="DarkMagenta" Foreground="Violet" />
             <g7:PhenoTile Grid.Row="2" Grid.Column="0"  Title="Fruto Verde" Background="DarkOliveGreen" Foreground="Lime" />
             <g7:PhenoTile Grid.Row="2" Grid.Column="1" Title="Fruto Maduro" Background="Maroon" Foreground="OrangeRed" />
-            <StackPanel x:Name="TitlePanel222" Grid.Column="2" Grid.RowSpan="3" Margin="12,17,0,28">
-                <Controls:RoundButton Grid.Row="1" Grid.Column="2" ImageSource="Toolkit.Content\ApplicationBar.Check.png" Click="RoundButton_Click" />
-            </StackPanel>
+            <Grid Grid.Column="2" Grid.RowSpan="3" Margin="12,25,12,25" VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Controls:RoundButton Grid.Row="0" ImageSource="Toolkit.Content/ApplicationBar.Check.png" Click="OnCheck" />
+                <Image Opacity="0.5" Source="Icons/Note.png" Grid.Row="1" Width="37"/>
+                <Controls:RoundButton Grid.Row="3" IsEnabled="False" ImageSource="Toolkit.Content/ApplicationBar.Select.png" Click="OnCheck" />
+            </Grid>
         </Grid>
     </Grid>
 
