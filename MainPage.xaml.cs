@@ -30,35 +30,34 @@ namespace G7Phenology
 
         private void OnCheck(object sender, RoutedEventArgs e)
         {
-            List<int> states = new List<int>(6);
-            for (int i = 0; i < 6; i++)
-            {
-                PhenoTile pheno = (PhenoTile)ContentPanel.Children.ElementAt(i);
-                states.Add(pheno.reset());
-            }
-            new ToastPrompt
-            {
-                Height = 173,
-                Margin = new Thickness {
-                    Top = 48
-                },
-                Title = mockId.ToString(),
-                VerticalContentAlignment = VerticalAlignment.Center,
-                Background = new SolidColorBrush
-                {
-                    Color = Colors.Black,
-                    Opacity = 0.85
-                },
-                Message = mockSpecies[mockId % 4] + ": " + String.Join(",", states),
-                ImageSource = new BitmapImage(new Uri("Toolkit.Content/ApplicationBar.Check.png", UriKind.RelativeOrAbsolute)),
-            }.Show();
-            next();
-        }
-        private void next()
-        {
             progress.Value = ++mockId % progress.Maximum;
             if (progress.Value == 0)
                 sector.Text = "BS" + mockSectorId++;
+            (sender as Button).IsEnabled = false;
+            int[] intensities = new int[6];
+            for (int phase = 0; phase < 6; phase++)
+            {
+                PhenoTile pheno = ContentPanel.Children.ElementAt(phase) as PhenoTile;
+                intensities[phase] = (pheno.Intensity);
+            }
+            ToastPrompt prompt = new PhenoPrompt
+            {
+                Phenology = intensities.ToArray(),
+            };
+            prompt.Completed += delegate
+            {
+                next();
+                (sender as Button).IsEnabled = true;
+            };
+            prompt.Show();
+        }
+        private void next()
+        {
+            for (int phase = 0; phase < 6; phase++)
+            {
+                PhenoTile pheno = ContentPanel.Children.ElementAt(phase) as PhenoTile;
+                pheno.Intensity = 0;
+            }
             name.Content = mockId + " " + mockSpecies[mockId % 4];
             image.Source = new BitmapImage(new Uri("Images/" + (mockId % 4 + 1) + ".jpg", UriKind.RelativeOrAbsolute));
         }
