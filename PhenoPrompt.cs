@@ -18,13 +18,13 @@ namespace G7Phenology
 
         public PhenoPrompt()
         {
-            Margin = new Thickness(0, 48, 0, 0);
-            MillisecondsUntilHidden = 1500;
+            MillisecondsUntilHidden = 5000;
+            VerticalAlignment = VerticalAlignment.Bottom;
             VerticalContentAlignment = VerticalAlignment.Center;
             Background = new SolidColorBrush
             {
                 Color = Colors.Black,
-                Opacity = 0.6
+                Opacity = 0.9
             };
         }
 
@@ -33,9 +33,9 @@ namespace G7Phenology
             base.OnApplyTemplate();
             StackPanel phenoPanel = new StackPanel
             {
+                Height = 80,
                 Orientation = Orientation.Horizontal,
-                HorizontalAlignment = HorizontalAlignment.Center,
-                Margin = new Thickness(0, 0, 10, 0)
+                HorizontalAlignment = HorizontalAlignment.Center
             };
             for (int phase = 0; phase < 6; phase++)
             {
@@ -47,12 +47,18 @@ namespace G7Phenology
             }
             Grid panel = (((GetTemplateChild("ToastImage") as Image).Parent as Panel).Parent as Panel).Parent as Grid;
             panel.Children.Clear();
-            panel.Height = 173;
-            panel.Children.Add(new Image
+            panel.Children.Add(new TextBlock
             {
+                Text = Title,
+                FontWeight = FontWeights.Bold,
                 VerticalAlignment = VerticalAlignment.Top,
                 HorizontalAlignment = HorizontalAlignment.Left,
-                Margin = new Thickness(10, 10, 0, 0),
+                Margin = new Thickness(10, 10, 10, 10)
+            });
+            panel.Children.Add(new Image
+            {
+                VerticalAlignment = VerticalAlignment.Bottom,
+                HorizontalAlignment = HorizontalAlignment.Left,
                 Stretch = Stretch.None,
                 Source = new BitmapImage(new Uri("Toolkit.Content/ApplicationBar.Check.png", UriKind.RelativeOrAbsolute))
             });
