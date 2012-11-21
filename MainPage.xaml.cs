@@ -30,10 +30,11 @@ namespace G7Phenology
 
         private void OnCheck(object sender, RoutedEventArgs e)
         {
-            progress.Value = ++mockId % progress.Maximum;
-            if (progress.Value == 0)
-                sector.Text = "BS" + mockSectorId++;
-            (sender as Button).IsEnabled = false;
+            save();
+            next();
+        }
+        private void save()
+        {
             int[] intensities = new int[6];
             for (int phase = 0; phase < 6; phase++)
             {
@@ -42,17 +43,16 @@ namespace G7Phenology
             }
             ToastPrompt prompt = new PhenoPrompt
             {
-                Phenology = intensities.ToArray(),
+                Title = mockId.ToString(),
+                Phenology = intensities.ToArray()
             };
-            prompt.Completed += delegate
-            {
-                next();
-                (sender as Button).IsEnabled = true;
-            };
+            progress.Value = ++mockId % progress.Maximum;
             prompt.Show();
         }
         private void next()
         {
+            if (progress.Value == 0)
+                sector.Text = "BS" + mockSectorId++;
             for (int phase = 0; phase < 6; phase++)
             {
                 PhenoTile pheno = ContentPanel.Children.ElementAt(phase) as PhenoTile;
@@ -61,7 +61,5 @@ namespace G7Phenology
             name.Content = mockId + " " + mockSpecies[mockId % 4];
             image.Source = new BitmapImage(new Uri("Images/" + (mockId % 4 + 1) + ".jpg", UriKind.RelativeOrAbsolute));
         }
-
-
     }
 }
