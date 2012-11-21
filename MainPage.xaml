@@ -23,35 +23,17 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" HorizontalAlignment="Left">
+        <StackPanel Grid.Row="0" HorizontalAlignment="Left">
             <ProgressBar x:Name="progress" Height="9" Maximum="100" Value="33" Foreground="White" />
-            <StackPanel Orientation="Horizontal">
-                <TextBlock x:Name="sector" FontWeight="Bold" Text="BS23" Style="{StaticResource PhoneTextNormalStyle}"/>
-                <TextBlock x:Name="ApplicationTitle" FontWeight="Bold" Text="G7-Phenology" Margin="260,0,0,0" Style="{StaticResource PhoneTextNormalStyle}"/>
-            </StackPanel>
-            <!--<Controls:ImageTile
-    x:Name="imgTile"
-HorizontalAlignment="Center"
-IsFrozen="False"
-AnimationType="Fade"
-AnimationDuration="250"
-ImageCycleInterval="2000"
-Rows="2"
-Columns="2"
-LargeTileRows="2"
-LargeTileColumns="2"
-Width="458"
-Height="173"/>-->
-            <!--<Controls:Tile Width="358" Margin="12" Title="124 Ophrys tenthredinifera" Foreground="Black">
-                <StackPanel>
-                <Controls:TileNotification
-                    Padding="18, 0"
-                    Background="Black" Opacity="0.8">
-                    124 Ophrys tenthredinifera
-                    </Controls:TileNotification>
-                    <Image Source="Images/3.jpg" Stretch="None"/>
-                </StackPanel>
-            </Controls:Tile>-->
+            <Grid>
+                <TextBlock x:Name="sector" HorizontalAlignment="Left" FontWeight="Bold" Text="BS23" Style="{StaticResource PhoneTextNormalStyle}"/>
+                <Grid Width="180">
+                    <TextBlock x:Name="prevSpec" HorizontalAlignment="Left" Style="{StaticResource PhoneTextSmallStyle}" Text="..." />
+                    <TextBlock x:Name="specimen" HorizontalAlignment="Center" FontWeight="Bold" Text="123" />
+                    <TextBlock x:Name="nextSpec" HorizontalAlignment="Right" Style="{StaticResource PhoneTextSmallStyle}" Text="..." />
+                </Grid>
+                <TextBlock HorizontalAlignment="Right" Text="G7-Phenology" Margin="260,0,0,0" Style="{StaticResource PhoneTextSmallStyle}"/>
+            </Grid>
             <Controls:Tile
             HorizontalAlignment="Left"
             Margin="12, 12"
@@ -68,10 +50,8 @@ Height="173"/>-->
                             </Image.RenderTransform>
                         </Image>
                     </Canvas>
-                    <Controls:TileNotification x:Name="name" Opacity="0.8"
-                    Padding="18, 0"
-                    Background="Black">
-                        124 Ophrys tenthredinifera
+                    <Controls:TileNotification x:Name="name" Opacity="0.8" Padding="10, 0" Background="Black">
+                        Ophrys tenthredinifera
                     </Controls:TileNotification>
                 </Grid>
             </Controls:Tile>

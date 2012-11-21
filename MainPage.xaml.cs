@@ -62,7 +62,8 @@ namespace G7Phenology
                 PhenoTile pheno = ContentPanel.Children.ElementAt(phase) as PhenoTile;
                 pheno.Intensity = 0;
             }
-            name.Content = mockId + " " + mockSpecies[mockId % 4];
+            specimen.Text = mockId.ToString();
+            name.Content = mockSpecies[mockId % 4];
             image.Source = new BitmapImage(new Uri("Images/" + (mockId % 4 + 1) + ".jpg", UriKind.RelativeOrAbsolute));
         }
         private bool missing()
@@ -70,7 +71,7 @@ namespace G7Phenology
             MessagePrompt message = new MessagePrompt
             {
                 Title = "Nenhuma fenofase registrada",
-                Body = new TextBlock { Text = "Registrar " + mockId + " como não encontrada?" },
+                Body = new TextBlock { Text = "Registrar " + mockId + " como não encontrado?" },
                 IsCancelVisible = true,
                 VerticalContentAlignment = VerticalAlignment.Bottom
             };

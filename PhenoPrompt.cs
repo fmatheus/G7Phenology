@@ -18,7 +18,7 @@ namespace G7Phenology
 
         public PhenoPrompt()
         {
-            MillisecondsUntilHidden = 5000;
+            MillisecondsUntilHidden = 1500;
             VerticalAlignment = VerticalAlignment.Bottom;
             VerticalContentAlignment = VerticalAlignment.Center;
             Background = new SolidColorBrush
