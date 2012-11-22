@@ -78,8 +78,10 @@ namespace G7Phenology
                     break;
                 case 1:
                     icon1.Fill = Foreground;
+                    icon2.Fill = whiteBrush;
                     break;
                 case 2:
+                    icon1.Fill = Foreground;
                     icon2.Fill = Foreground;
                     break;
             }

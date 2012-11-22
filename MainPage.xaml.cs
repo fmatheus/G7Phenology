@@ -17,15 +17,13 @@ namespace G7Phenology
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        int mockId = 119;
-        int mockSectorId = 23;
-        static String[] mockSpecies = { "Phalaenopsis hieroglyphica", "Ophrys tenthredinifera", "Angraecum sesquipedale", "Paphiopedilum concolor" };
 
         public MainPage()
         {
             InitializeComponent();
-            progress.Maximum = 10;
             specNotification.Background.Opacity = 0.8;
+            progress.Minimum = PhenologyDataContext.Singleton().mockId + 1;
+            progress.Maximum = PhenologyDataContext.Singleton().Specimens.Length;
             next();
         }
 
@@ -40,6 +38,7 @@ namespace G7Phenology
             {
                 PhenoTile pheno = ContentPanel.Children.ElementAt(phase) as PhenoTile;
                 intensities[phase] = (pheno.Intensity);
+                PhenologyDataContext.Singleton().selected().updatePhenology(intensities);
             }
             if (intensities.Sum() == 0)
             {
@@ -47,32 +46,43 @@ namespace G7Phenology
             }
             ToastPrompt prompt = new PhenoPrompt
             {
-                Title = mockId.ToString(),
+                Title = PhenologyDataContext.Singleton().selected().Id.ToString(),
                 Phenology = intensities
             };
+            prompt.Tap += delegate { PhenologyDataContext.Singleton().prev(); load(); };
             prompt.Show();
             return true;
         }
+
         private void next()
         {
-            progress.Value = ++mockId % progress.Maximum;
-            if (progress.Value == 0)
-                sector.Text = "BS" + mockSectorId++;
+            if (PhenologyDataContext.Singleton().next() != null)
+                load();
+        }
+        private void load()
+        {
+            Specimen spec = PhenologyDataContext.Singleton().selected();
+            progress.Value = spec.Id;
+            sector.Text = spec.Sector;
+            specimen.Text = spec.Id.ToString();
+            name.Text = spec.Name;
+            notes.Text = spec.Comment;
+            notes.Visibility = String.IsNullOrEmpty(spec.Comment) ? Visibility.Collapsed : Visibility.Visible;
+            image.Source = new BitmapImage(new Uri(spec.Pictures[0], UriKind.RelativeOrAbsolute));
+            int[] phenology = spec.getPhenology();
             for (int phase = 0; phase < 6; phase++)
             {
                 PhenoTile pheno = ContentPanel.Children.ElementAt(phase) as PhenoTile;
-                pheno.Intensity = 0;
+                pheno.Intensity = phenology[phase];
             }
-            specimen.Text = mockId.ToString();
-            name.Text = mockSpecies[mockId % 4];
-            image.Source = new BitmapImage(new Uri("Images/" + (mockId % 4 + 1) + ".jpg", UriKind.RelativeOrAbsolute));
         }
+
         private bool missing()
         {
             MessagePrompt message = new MessagePrompt
             {
                 Title = "Nenhuma fenofase registrada",
-                Body = new TextBlock { Text = "Registrar " + mockId + " como não encontrado?" },
+                Body = new TextBlock { Text = "Registrar " + PhenologyDataContext.Singleton().selected().Id + " como não encontrado?" },
                 IsCancelVisible = true,
                 VerticalContentAlignment = VerticalAlignment.Bottom
             };
