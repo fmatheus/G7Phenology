@@ -109,6 +109,7 @@ namespace G7Phenology
             Grid grid = new Grid();
             notification = new TileNotification
             {
+                Background = App.Current.Resources["TransparentBrush"] as Brush,
                 Visibility = Visibility.Collapsed
             };
             grid.Children.Add(notification);

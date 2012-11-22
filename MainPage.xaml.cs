@@ -117,7 +117,6 @@ namespace G7Phenology
             NavigationService.Navigate(new Uri("/Chat.xaml", UriKind.Relative));
         }
 
-        private static Brush[] backgrounds;
         private void OnContrast(object sender, RoutedEventArgs e)
         {
             for (int phase = 0; phase < 6; phase++)
