@@ -16,6 +16,10 @@ namespace G7Phenology
 {
     public partial class Chat : PhoneApplicationPage
     {
+
+        protected ChatBubble myBubble;
+        protected ChatBubbleTextBox myBubbleText;
+
         public Chat()
         {
             InitializeComponent();
@@ -33,13 +37,34 @@ namespace G7Phenology
             }
             int[] phenology = spec.getPhenology();
             if (phenology.Sum() > 0)
-                chat.Children.Add(new ChatBubble
+                myBubble = new ChatBubble
                 {
-                    Margin = new Thickness(12,12,12,12),
+                    Margin = new Thickness(12, 12, 12, 12),
                     Background = App.Current.Resources["PhoneDisabledBrush"] as Brush,
                     ChatBubbleDirection = ChatBubbleDirection.LowerRight,
                     Content = PhenoPrompt.phenoPanel(phenology)
-                });
+                };
+            myBubbleText = new ChatBubbleTextBox
+            {
+                AcceptsReturn = true,
+                Margin = new Thickness(12, 12, 12, 12),
+                VerticalAlignment = VerticalAlignment.Bottom,
+                ChatBubbleDirection = ChatBubbleDirection.LowerRight,
+            };
+            if (myBubble != null)
+                chat.Children.Add(myBubble);
+            chat.Children.Add(myBubbleText);
+            myBubbleText.Focus();
+        }
+
+        private void OkClick(object sender, EventArgs e)
+        {
+            (myBubble.Content as Panel).Children.Add(new TextBlock { Text = myBubbleText.Text });
+            NavigationService.GoBack();
+        }
+        private void CancelClick(object sender, EventArgs e)
+        {
+            NavigationService.GoBack();
         }
     }
 }
