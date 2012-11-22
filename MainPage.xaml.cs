@@ -89,7 +89,23 @@ namespace G7Phenology
             message.Completed += delegate(Object sender, PopUpEventArgs<string, PopUpResult> e)
             {
                 if (e.PopUpResult == PopUpResult.Ok)
+                {
+                    new ToastPrompt
+                    {
+                        Title = PhenologyDataContext.Singleton().selected().Id.ToString(),
+                        Message = "Não encontrado.",
+                        MillisecondsUntilHidden = 1500,
+                        VerticalAlignment = VerticalAlignment.Bottom,
+                        VerticalContentAlignment = VerticalAlignment.Center,
+                        Background = new SolidColorBrush
+                        {
+                            Color = Colors.Black,
+                            Opacity = 0.9
+                        },
+                        ImageSource = new BitmapImage(new Uri("Toolkit.Content/ApplicationBar.Check.png", UriKind.RelativeOrAbsolute))
+                    }.Show();
                     next();
+                }
             };
             message.Show();
             return false;

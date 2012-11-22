@@ -22,7 +22,7 @@ namespace G7Phenology
 
         public PhenologyDataContext()
         {
-            Specimens = new Specimen[mockId + 6];
+            Specimens = new Specimen[mockId + 7];
         }
         public static PhenologyDataContext Singleton()
         {
