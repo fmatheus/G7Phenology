@@ -28,9 +28,8 @@ namespace G7Phenology
             };
         }
 
-        public override void OnApplyTemplate()
+        public static StackPanel phenoPanel(int[] phenology)
         {
-            base.OnApplyTemplate();
             StackPanel phenoPanel = new StackPanel
             {
                 Height = 80,
@@ -39,12 +38,26 @@ namespace G7Phenology
             };
             for (int phase = 0; phase < 6; phase++)
             {
-                int intensity = Phenology[phase];
+                int intensity = phenology[phase];
                 while (intensity-- > 0)
                 {
                     phenoPanel.Children.Add(PhenoTile.createIcon(phase));
                 }
             }
+            if (phenoPanel.Children.Count == 0)
+            {
+                phenoPanel.Children.Add(new TextBlock
+                {
+                    Text = "Não encontrado.",
+                    FontWeight = FontWeights.Bold
+                });
+            }
+            return phenoPanel;
+        }
+
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
             Grid panel = (((GetTemplateChild("ToastImage") as Image).Parent as Panel).Parent as Panel).Parent as Grid;
             panel.Children.Clear();
             panel.Children.Add(new TextBlock
@@ -62,7 +75,7 @@ namespace G7Phenology
                 Stretch = Stretch.None,
                 Source = new BitmapImage(new Uri("Toolkit.Content/ApplicationBar.Check.png", UriKind.RelativeOrAbsolute))
             });
-            panel.Children.Add(phenoPanel);
+            panel.Children.Add(phenoPanel(Phenology));
         }
 
         public int[] Phenology

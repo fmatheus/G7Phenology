@@ -79,7 +79,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Controls:RoundButton Grid.Row="0" ImageSource="Toolkit.Content/ApplicationBar.Check.png" Click="OnCheck" />
-                <Controls:RoundButton Grid.Row="1" ImageSource="Icons/Note.png" IsEnabled="False" />
+                <Controls:RoundButton Grid.Row="1" ImageSource="Icons/Note.png" Click="OnChat" />
                 <Controls:RoundButton Grid.Row="3" ImageSource="Toolkit.Content/ApplicationBar.Select.png" IsEnabled="False" />
             </Grid>
         </Grid>

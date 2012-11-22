@@ -29,7 +29,19 @@ namespace G7Phenology
 
         private void OnCheck(object sender, RoutedEventArgs e)
         {
-            if (save()) next();
+            if (!save())
+            {
+                missing();
+                return;
+            }
+                ToastPrompt prompt = new PhenoPrompt
+                {
+                    Title = PhenologyDataContext.Singleton().selected().Id.ToString(),
+                    Phenology = PhenologyDataContext.Singleton().selected().getPhenology()
+                };
+                prompt.Tap += delegate { PhenologyDataContext.Singleton().prev(); load(); };
+                prompt.Show();
+                next();
         }
         private bool save()
         {
@@ -38,20 +50,9 @@ namespace G7Phenology
             {
                 PhenoTile pheno = ContentPanel.Children.ElementAt(phase) as PhenoTile;
                 intensities[phase] = (pheno.Intensity);
-                PhenologyDataContext.Singleton().selected().updatePhenology(intensities);
             }
-            if (intensities.Sum() == 0)
-            {
-                return missing();
-            }
-            ToastPrompt prompt = new PhenoPrompt
-            {
-                Title = PhenologyDataContext.Singleton().selected().Id.ToString(),
-                Phenology = intensities
-            };
-            prompt.Tap += delegate { PhenologyDataContext.Singleton().prev(); load(); };
-            prompt.Show();
-            return true;
+            PhenologyDataContext.Singleton().selected().updatePhenology(intensities);
+            return intensities.Sum() > 0;
         }
 
         private void next()
@@ -77,7 +78,7 @@ namespace G7Phenology
             }
         }
 
-        private bool missing()
+        private void missing()
         {
             MessagePrompt message = new MessagePrompt
             {
@@ -108,7 +109,12 @@ namespace G7Phenology
                 }
             };
             message.Show();
-            return false;
+        }
+
+        private void OnChat(object sender, RoutedEventArgs e)
+        {
+            save();
+            NavigationService.Navigate(new Uri("/Chat.xaml", UriKind.Relative));
         }
     }
 }
