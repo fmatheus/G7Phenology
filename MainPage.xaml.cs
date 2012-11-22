@@ -25,6 +25,7 @@ namespace G7Phenology
         {
             InitializeComponent();
             progress.Maximum = 10;
+            specNotification.Background.Opacity = 0.8;
             next();
         }
 
@@ -47,7 +48,7 @@ namespace G7Phenology
             ToastPrompt prompt = new PhenoPrompt
             {
                 Title = mockId.ToString(),
-                Phenology = intensities.ToArray()
+                Phenology = intensities
             };
             prompt.Show();
             return true;
@@ -63,7 +64,7 @@ namespace G7Phenology
                 pheno.Intensity = 0;
             }
             specimen.Text = mockId.ToString();
-            name.Content = mockSpecies[mockId % 4];
+            name.Text = mockSpecies[mockId % 4];
             image.Source = new BitmapImage(new Uri("Images/" + (mockId % 4 + 1) + ".jpg", UriKind.RelativeOrAbsolute));
         }
         private bool missing()

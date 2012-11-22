@@ -29,29 +29,25 @@
                 <TextBlock x:Name="sector" HorizontalAlignment="Left" FontWeight="Bold" Text="BS23" Style="{StaticResource PhoneTextNormalStyle}"/>
                 <Grid Width="180">
                     <TextBlock x:Name="prevSpec" HorizontalAlignment="Left" Style="{StaticResource PhoneTextSmallStyle}" Text="..." />
-                    <TextBlock x:Name="specimen" HorizontalAlignment="Center" FontWeight="Bold" Text="123" />
+                    <TextBlock x:Name="specimen" HorizontalAlignment="Center" Style="{StaticResource PhoneTextNormalStyle}" FontWeight="Bold" Text="123" />
                     <TextBlock x:Name="nextSpec" HorizontalAlignment="Right" Style="{StaticResource PhoneTextSmallStyle}" Text="..." />
                 </Grid>
-                <TextBlock HorizontalAlignment="Right" Text="G7-Phenology" Margin="260,0,0,0" Style="{StaticResource PhoneTextSmallStyle}"/>
+                <TextBlock HorizontalAlignment="Right" Text="G7-Phenology" Style="{StaticResource PhoneTextAccentStyle}"/>
             </Grid>
-            <Controls:Tile
-            HorizontalAlignment="Left"
-            Margin="12, 12"
-            Width="458"
-            Height="173">
+            <Controls:Tile HorizontalAlignment="Left" Margin="12, 12" Width="458" Height="173">
                 <Grid>
                     <Canvas>
-                        <Image
-                        x:Name="image"
-                        Source="Images/3.jpg"
-                        Width="458">
+                        <Image x:Name="image" Source="Images/3.jpg" Width="458">
                             <Image.RenderTransform>
                                 <ScaleTransform ScaleY="0.5" />
                             </Image.RenderTransform>
                         </Image>
                     </Canvas>
-                    <Controls:TileNotification x:Name="name" Opacity="0.8" Padding="10, 0" Background="Black">
-                        Ophrys tenthredinifera
+                    <Controls:TileNotification x:Name="specNotification" Background="Black">
+                        <StackPanel>
+                            <TextBlock x:Name="name" Margin="5,5" Text="Ophrys tenthredinifera" />
+                            <TextBlock x:Name="notes" Style="{StaticResource PhoneTextSmallStyle}" Text="cuidado com a trepadeira" Visibility="Visible" />
+                        </StackPanel>
                     </Controls:TileNotification>
                 </Grid>
             </Controls:Tile>
