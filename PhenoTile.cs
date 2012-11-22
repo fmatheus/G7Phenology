@@ -23,6 +23,7 @@ namespace G7Phenology
 
         Rectangle icon1;
         Rectangle icon2;
+        TileNotification notification;
 
         public PhenoTile()
         {
@@ -44,7 +45,7 @@ namespace G7Phenology
         {
             (o as PhenoTile).renderIntensity();
         }
-        
+
         static Rectangle createIcon(String name)
         {
             return new Rectangle
@@ -85,6 +86,7 @@ namespace G7Phenology
                     icon2.Fill = Foreground;
                     break;
             }
+            notification.Content = Intensity;
         }
 
         protected override void OnClick()
@@ -96,23 +98,34 @@ namespace G7Phenology
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            if (Content == null)
+            Background.Opacity = 0.6;
+
+            StackPanel icons = new StackPanel
             {
-                Background.Opacity = 0.6;
-                StackPanel icons = new StackPanel
-                {
-                    Orientation = Orientation.Horizontal,
-                    HorizontalAlignment = HorizontalAlignment.Center
-                };
-                Content = icons;
-                icon1 = createIcon(Title);
-                icon2 = createIcon(Title);
-                icons.Children.Add(icon1);
-                icons.Children.Add(icon2);
-                renderIntensity();
-            }
+                Orientation = Orientation.Horizontal,
+                HorizontalAlignment = HorizontalAlignment.Center
+            };
+
+            Grid grid = new Grid();
+            notification = new TileNotification
+            {
+                Visibility = Visibility.Collapsed
+            };
+            grid.Children.Add(notification);
+            grid.Children.Add(icons);
+            Content = grid;
+
+            icon1 = createIcon(Title);
+            icon2 = createIcon(Title);
+            icons.Children.Add(icon1);
+            icons.Children.Add(icon2);
+            renderIntensity();
+
             phenoBackground[phase] = Background;
             phenoForeground[phase++] = Foreground;
+        }
+        public void toggleVisibility() {
+            notification.Visibility = notification.Visibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
         }
     }
 }

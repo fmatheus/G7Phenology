@@ -129,5 +129,13 @@ namespace G7Phenology
                     pheno.Background = PhenoTile.phenoBackground[phase];
             }
         }
+
+        private void OnShowIntensity(object sender, System.Windows.Input.GestureEventArgs e)
+        {
+            for (int phase = 0; phase < 6; phase++)
+            {
+                (ContentPanel.Children.ElementAt(phase) as PhenoTile).toggleVisibility();
+            }
+        }
     }
 }

@@ -80,7 +80,7 @@
                 </Grid.RowDefinitions>
                 <Controls:RoundButton Grid.Row="0" ImageSource="Toolkit.Content/ApplicationBar.Check.png" Click="OnCheck" />
                 <Controls:RoundButton Grid.Row="1" ImageSource="Icons/Note.png" Click="OnChat" />
-                <Controls:RoundToggleButton Grid.Row="3" ImageSource="Toolkit.Content/ApplicationBar.Select.png" Click="OnContrast" />
+                <Controls:RoundToggleButton Grid.Row="3" ImageSource="Toolkit.Content/ApplicationBar.Select.png" Click="OnContrast" Hold="OnShowIntensity" />
             </Grid>
         </Grid>
     </Grid>
