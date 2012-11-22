@@ -18,7 +18,7 @@ namespace G7Phenology
         protected static readonly Brush whiteBrush = new SolidColorBrush(Colors.White);
         protected static readonly String[] phenophases = { "Brotamento", "Queda", "Botão", "Antese", "Fruto Verde", "Fruto Maduro" };
         protected static Brush[] phenoForeground = new Brush[6];
-        protected static Brush[] phenoBackground = new Brush[6];
+        public static Brush[] phenoBackground = new Brush[6];
         private static int phase = 0;
 
         Rectangle icon1;

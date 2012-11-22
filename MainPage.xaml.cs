@@ -116,5 +116,18 @@ namespace G7Phenology
             save();
             NavigationService.Navigate(new Uri("/Chat.xaml", UriKind.Relative));
         }
+
+        private static Brush[] backgrounds;
+        private void OnContrast(object sender, RoutedEventArgs e)
+        {
+            for (int phase = 0; phase < 6; phase++)
+            {
+                PhenoTile pheno = ContentPanel.Children.ElementAt(phase) as PhenoTile;
+                if ((sender as RoundToggleButton).IsChecked == true)
+                    pheno.Background = App.Current.Resources["PhoneChromeBrush"] as Brush;
+                else
+                    pheno.Background = PhenoTile.phenoBackground[phase];
+            }
+        }
     }
 }
